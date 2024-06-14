@@ -33,3 +33,17 @@
 
 #for deletinf the file already created
 # os.remove("file.txt")
+
+with open("file2.txt",'wb') as f:
+    eid=1
+    name="bat"
+    condition="good"
+    s=f"{eid},{name},{condition}\n"
+    f.write(s.encode())
+    s=f"{eid},{name},{condition}\n"
+    f.write(s.encode())
+    f.close()
+with open("file2.txt",'r') as f:
+    s=f.read()
+    print(s)
+    f.close()
