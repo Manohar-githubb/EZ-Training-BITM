@@ -16,4 +16,4 @@ def print_link_list(Head):
     while curr!=None:
         print(curr.value)
         curr=curr.next
-print_link_list(Head)   
+print_link_list(Head)
