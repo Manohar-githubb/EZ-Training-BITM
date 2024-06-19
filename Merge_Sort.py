@@ -1,33 +1,40 @@
-def merge(l,low,mid,high):
-    left=l[low:mid]
-    right=l[mid+1:high]
-    i=j=t=0
-    temp=[0]*len(l)
+def merge(left,right):
+    i=j=0
+    temp=[]
+
     while i<len(left) and j<len(right):
         if left[i]<right[j]:
-            temp[t]=left[i]
+            temp.append(left[i])
             i+=1
-            t+=1
         else:
-            temp[t]=left[j]
+            temp.append(right[j])
             j+=1
-            t+=1
+            
     while i<len(left):
-        temp[t]=left[i]
+        temp.append(left[i])
         i+=1
-        t+=1
-    while j<len(right):
-        temp[t]=right[j]
-        j+=1
-        t+=1
         
-def merge_sort(l,low,high):
-    if low<high:
-        mid=low+(high-low)//2
-        merge_sort(l,low,mid)
-        merge_sort(l,mid+1,high)
-        merge(l,low,mid,high)   
+    while j<len(right):
+        temp.append(right[j])
+        j+=1
+
+    return temp
+
+def mergesort(L):
+    if len(L) <= 1:
+        return L
+        
+    mid = len(L)//2
+    left=L[:mid] 
+    right=L[mid:]
+    
+    left_sorted = mergesort(left)
+    right_sorted = mergesort(right)
+    
+    return merge(left_sorted,right_sorted)
+
+
 if __name__=="__main__":
-    l=list(map(int,input().split()))
-    merge_sort(l,0,len(l)-1)
-    print("Sorted Array: ",l)
+    L=list(map(int,input().split())) 
+    sorted=mergesort(L)
+    print("Sorted Array = ",sorted)
